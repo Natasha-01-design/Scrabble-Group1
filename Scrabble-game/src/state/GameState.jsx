@@ -18,13 +18,13 @@ export const useGameState = () => {
   const victoryMusic = useRef(null);
 
   useEffect(() => {
-  const updatedPlayers = players.map(p => {
-    const { drawn, newBag } = drawLetters(letterBag, 7);
-    setLetterBag(newBag);
-    return { ...p, hand: drawn };
-  });
-  setPlayers(updatedPlayers);
-}, []);
+    const updatedPlayers = players.map(p => {
+      const { drawn, newBag } = drawLetters(letterBag, 7);
+      setLetterBag(newBag);
+      return { ...p, hand: drawn };
+    });
+    setPlayers(updatedPlayers);
+  }, []);
 
   const activePlayer = players[turnIndex];
 
@@ -33,7 +33,6 @@ export const useGameState = () => {
 
     const updatedBoard = board.map(r => [...r]);
     updatedBoard[row][col] = letter;
-
 
     const points = letterScores[letter] || 0;
 
@@ -69,6 +68,11 @@ export const useGameState = () => {
     setTurnIndex(next);
   };
 
+  const submitWord = () => {
+    console.log("submitWord triggered!");
+    nextTurn();
+  };
+
   return {
     board,
     players,
@@ -80,7 +84,6 @@ export const useGameState = () => {
     gameOver,
     placeLetter,
     nextTurn,
-    introMusic,
-    victoryMusic,
+    submitWord
   };
 };

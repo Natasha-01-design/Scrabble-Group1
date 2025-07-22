@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './ScoreBoard.css';
 
 const tips = [
-  "Play wisely , your tiles are limited.",
+  "Play wisely, your tiles are limited.",
   "Watch the timer! Every second counts.",
   "Combo spells score higher!",
   "Diversify your words – avoid repeats.",
@@ -56,11 +56,8 @@ const ScoreBoard = ({ players, currentTurn, nextTurn, isPaused = false }) => {
 
   return (
     <div className="score-board full-height">
-      <div className="announcer-bar">
-        🔊 {players[currentTurn]?.name.toUpperCase()} is Playing!
-      </div>
-
-      <div className="score-banner">🏆 Battle of the Realms</div>
+  
+      <div className="score-banner">Battle of the Realms</div>
 
       <div className="timer" style={{ color: getTimerColor() }}>
         ⏱ <strong>{timer}s</strong> left
@@ -68,7 +65,8 @@ const ScoreBoard = ({ players, currentTurn, nextTurn, isPaused = false }) => {
 
       <div className="turn-tip">💬 {tips[tipIndex]}</div>
 
-      <h2>Standings</h2>
+      <h2 className="mk-style">Standings</h2>
+
       <div className="score-scroll">
         {players.map((p, i) => {
           const scoreTrend = p.score - lastScores[i];
@@ -85,11 +83,7 @@ const ScoreBoard = ({ players, currentTurn, nextTurn, isPaused = false }) => {
               <div className="player-info">
                 <strong>{p.name}</strong> <br />
                 <span>{p.style}</span>
-                <div className="mini-stats">
-                  🧩 Tiles: {p.tiles?.length || 7} <br />
-                  📜 Words: {p.wordsPlayed?.length || 0} <br />
-                  🔥 Streak: {p.streak || 0}
-                </div>
+
               </div>
               <div className="player-score">
                 {p.score} pts
@@ -98,20 +92,15 @@ const ScoreBoard = ({ players, currentTurn, nextTurn, isPaused = false }) => {
                     {scoreTrend > 0 ? ` ↑ +${scoreTrend}` : ` ↓ ${scoreTrend}`}
                   </span>
                 )}
-                <div className="badge">{getBadge(p)}</div>
+
               </div>
             </div>
           );
         })}
-      </div>
-
-      <div className="score-footer extended">
-        <div className="stat-bar">⚔️ Total Spells Cast: <strong>{totalWords}</strong></div>
-        <div className="stat-bar">🧠 Average Score: <strong>{averageScore}</strong></div>
-        <div className="stat-bar">🔮 Active Realm: <strong>{players[currentTurn]?.style || 'Mystic'}</strong></div>
       </div>
     </div>
   );
 };
 
 export default ScoreBoard;
+ 
